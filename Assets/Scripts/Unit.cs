@@ -11,6 +11,11 @@ public class Unit : MonoBehaviour
     [SerializeField] private Animator unitAnimator;
 
     [SerializeField] float rotateSpeed = 10f;
+
+    private void Awake()
+    {
+        targetPosition = transform.position;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -29,13 +34,10 @@ public class Unit : MonoBehaviour
 
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            Move(MouseWorld.GetPosition());
-        }
+
     }
 
-    private void Move(Vector3 targetPosition)
+    public void Move(Vector3 targetPosition)
     {
         this.targetPosition = targetPosition;
     }
