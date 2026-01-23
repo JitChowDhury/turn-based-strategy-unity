@@ -1,3 +1,5 @@
 ﻿<Solution>
+  <Project Path="TinyGiantStudio.DevTools.csproj" />
+  <Project Path="TinyGiantStudio.DevTools.DevTrails.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
 </Solution>
