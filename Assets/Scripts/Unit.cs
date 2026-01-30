@@ -6,6 +6,8 @@ using UnityEngine.Scripting.APIUpdating;
 public class Unit : MonoBehaviour
 {
     private Vector3 targetPosition;
+    private GridPosition currentGridPos;
+
     [SerializeField] private float moveSpeed;
     [SerializeField] private float stoppingDistance = .1f;
     [SerializeField] private Animator unitAnimator;
@@ -16,6 +18,14 @@ public class Unit : MonoBehaviour
     {
         targetPosition = transform.position;
     }
+
+    void Start()
+    {
+        currentGridPos = LevelGrid.Instance.GetGridPosition(transform.position);
+        LevelGrid.Instance.AddUnitAtGridPosition(currentGridPos, this);
+    }
+
+
     // Update is called once per frame
     void Update()
     {
@@ -33,7 +43,12 @@ public class Unit : MonoBehaviour
             unitAnimator.SetBool("IsWalking", false);
 
         }
-
+        GridPosition newGridPos = LevelGrid.Instance.GetGridPosition(transform.position);
+        if (newGridPos != currentGridPos)
+        {
+            LevelGrid.Instance.UnitMovedGridPosition(this, currentGridPos, newGridPos);
+            currentGridPos = newGridPos;
+        }
 
     }
 
@@ -41,4 +56,6 @@ public class Unit : MonoBehaviour
     {
         this.targetPosition = targetPosition;
     }
+
+
 }
